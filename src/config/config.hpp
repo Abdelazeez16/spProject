@@ -39,6 +39,45 @@ namespace EntityType
     };
 }
 
+namespace ProgramTypes
+{
+    enum ProgramTypes
+    {
+        TEAM,
+        JUDGE,
+        EVALUATION,
+        ADMIN,
+        STRING,
+        INT,
+        FLOAT,
+        DOUBLE,
+        NONE
+    };
+}
+
+namespace RoleType
+{
+    enum RoleType
+    {
+        TEAM,
+        JUDGE,
+        ADMIN,
+        ANONYMOUS
+    };
+}
+namespace Status
+{
+    enum StatusType
+    {
+        STATUS_200_OK,
+        STATUS_201_CREATED,
+        STATUS_202_ACCEPTED,
+        STATUS_204_NO_CONTENT,
+        STATUS_401_UNAUTHORIZED,
+        STATUS_404_NOT_FOUND,
+    };
+}
+
 
 /* struct schemas for project entities */
 
@@ -48,10 +87,10 @@ struct Team
     std::string team_id_;
     std::string team_name_;
     std::string university_name_;
-    unsigned short int number_of_members_;
+    unsigned short number_of_members_;
     std::string project_title_;
     float final_score_;
-    unsigned short int rank_;
+    unsigned short rank_;
 };
 
 // struct of a ( Judge )
@@ -70,10 +109,10 @@ struct Evaluation
     std::string evaluation_id_;
     std::string team_id_;
     std::string judge_id_;
-    unsigned short int innovation_score_; // 0 to 10
-    unsigned short int technical_score_; // 0 to 10
-    unsigned short int presentation_score_; // 0 to 10
-    unsigned short int total_score_; // 0 to 30
+    unsigned short innovation_score_; // 0 to 10
+    unsigned short technical_score_; // 0 to 10
+    unsigned short presentation_score_; // 0 to 10
+    unsigned short total_score_; // 0 to 30
 };
 
 // struct of ( Admin )
@@ -84,4 +123,16 @@ struct Admin
     std::string password_; // hashed
 };
 
+// struct of current logged in user ( can be either a judge or an admin )
+struct CurrentUser
+{
+    void *user_ptr_;
+    RoleType::RoleType user_type_;
+};
 
+struct Response
+{
+    const void *content_ptr_;
+    ProgramTypes::ProgramTypes content_type_;
+    Status::StatusType status_;
+};

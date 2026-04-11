@@ -154,7 +154,7 @@ Admin deserializeAdmin(const string& admin_string)
 }
 /***************************************************************/
 
-void deserializeTeamArrStr(const string& des_team_arr , Team* team_arr)
+int deserializeTeamArrStr(const string& des_team_arr , Team* team_arr)
 {
     string team_arr_str = des_team_arr;
     int number_of_teams = countChar('\n',team_arr_str);
@@ -164,10 +164,10 @@ void deserializeTeamArrStr(const string& des_team_arr , Team* team_arr)
         string team_str = substr( f_cutSubString(team_arr_str,0,indexOfChar('\n',team_arr_str)) , 0 , indexOfChar('\n',team_arr_str)-1 );
         team_arr[i] = deserializeTeam(team_str);
     }
-    
+    return number_of_teams;
 }
 
-void deserializeJudgeArrStr(const string& des_judge_arr , Judge* judge_arr)
+int deserializeJudgeArrStr(const string& des_judge_arr , Judge* judge_arr)
 {
     string judge_arr_str = des_judge_arr;
     int number_of_judges = countChar('\n',judge_arr_str);
@@ -177,10 +177,10 @@ void deserializeJudgeArrStr(const string& des_judge_arr , Judge* judge_arr)
         string judge_str = substr( f_cutSubString(judge_arr_str,0,indexOfChar('\n',judge_arr_str)) , 0 , indexOfChar('\n',judge_arr_str)-1 );
         judge_arr[i] = deserializeJudge(judge_str);
     }
-    
+    return number_of_judges;
 }
 
-void deserializeEvalArrStr(const string& des_evaluation_arr , Evaluation* evaluation_arr)
+int deserializeEvalArrStr(const string& des_evaluation_arr , Evaluation* evaluation_arr)
 {
     string evaluation_arr_str = des_evaluation_arr;
     int number_of_evaluations = countChar('\n',evaluation_arr_str);
@@ -190,9 +190,10 @@ void deserializeEvalArrStr(const string& des_evaluation_arr , Evaluation* evalua
         string evaluation_str = substr( f_cutSubString(evaluation_arr_str,0,indexOfChar('\n',evaluation_arr_str)) , 0 , indexOfChar('\n',evaluation_arr_str)-1 );
         evaluation_arr[i] = deserializeEvaluation(evaluation_str);
     }   
+    return number_of_evaluations;
 }
 
-void deserializeAdminArrStr(const string& des_admin_arr , Admin* admin_arr)
+int deserializeAdminArrStr(const string& des_admin_arr , Admin* admin_arr)
 {
     string admin_arr_str = des_admin_arr;
     int number_of_admins = countChar('\n',admin_arr_str);
@@ -202,4 +203,5 @@ void deserializeAdminArrStr(const string& des_admin_arr , Admin* admin_arr)
         string admin_str = substr( f_cutSubString(admin_arr_str,0,indexOfChar('\n',admin_arr_str)) , 0 , indexOfChar('\n',admin_arr_str)-1 );
         admin_arr[i] = deserializeAdmin(admin_str);
     }
+    return number_of_admins;
 }

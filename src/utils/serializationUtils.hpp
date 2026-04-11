@@ -28,23 +28,27 @@ string serializeEntity(const Admin& admin);
 
 // Converts an array of Team structs into a single string.
 // @param team_struct_arr Array of Team structs.
+// @param size the actual length of teams array
 // @return The serialized string representation.
 string serializeEntityArr(const Team* const team_struct_arr , int size = Size::kMIN_SIZE_OF_TEAMS);
 
 
 // Converts an array of Judge structs into a single string.
 // @param judge_struct_arr Array of Judge structs.
+// @param size the actual length of judges array
 // @return The serialized string representation.
 string serializeEntityArr(const Judge* const judge_struct_arr , int size = Size::kMIN_SIZE_OF_JUDGES);
 
 
 // Converts an array of Evaluation structs into a single string.
 // @param evaluation_struct_arr Array of Evaluation structs.
+// @param size the actual length of evaluations array
 // @return The serialized string representation.
 string serializeEntityArr(const Evaluation* const evaluation_struct_arr, int size = Size::kMIN_SIZE_OF_EVALUATIONS);
 
 
 // Converts an array of Admin structs into a single string.
 // @param admin_struct_arr Array of Admin structs.
+// @param size the actual length of admins array
 // @return The serialized string representation.
 string serializeEntityArr(const Admin* const admin_struct_arr, int size = Size::kMIN_SIZE_OF_ADMINS);
