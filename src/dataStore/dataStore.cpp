@@ -3,7 +3,7 @@
 #include "../utils/numericUtils.hpp"
 #include "../utils/serializationUtils.hpp"
 #include "../utils/deserializationUtils.hpp"
-
+#include <iostream>
 #include <stdexcept>
 #include <string>
 using std::string;
@@ -177,14 +177,40 @@ short getEvalIdxById(const string& id)
     }
     return -1;
 }
+
+short getJudgeIdxById(const string& id)
+{
+    for (int i = 0; i < number_of_judges; i++)
+    {
+        if (judges[i].judge_id_ == id)
+            return i;
+        
+    }
+    return -1;
+}
+
+short getAdminIdxById(const string& id)
+{
+    for (int i = 0; i < number_of_admins; i++)
+    {
+        if (admins[i].admin_id_ == id)
+            return i;
+        
+    }
+    return -1;
+}
 /*************************************************************************/
 void setTeamAt(const Team& team , unsigned int index)
 {
-    if (inRange(index,0,number_of_teams))
+    if (index == number_of_teams)
+    {
+        teams[number_of_teams++] = team;
+    }
+    else if (inRange(index,0,number_of_teams-1))
     {
         teams[index] = team;
     }
-    else if (inRange(index,0,Size::kMIN_SIZE_OF_TEAMS))
+    else if (inRange(index,number_of_teams + 1,Size::kMIN_SIZE_OF_TEAMS))
     {
         teams[index] = team;
         number_of_teams++;
@@ -197,11 +223,16 @@ void setTeamAt(const Team& team , unsigned int index)
 
 void setJudgeAt(const Judge& judge , unsigned int index)
 {
-    if (inRange(index,0,number_of_judges))
+    if (index == number_of_judges)
+    {
+        judges[number_of_judges++] = judge;
+    }
+    
+    else if (inRange(index,0,number_of_judges-1))
     {
         judges[index] = judge;
     }
-    else if (inRange(index,0,Size::kMIN_SIZE_OF_JUDGES))
+    else if (inRange(index,number_of_judges + 1,Size::kMIN_SIZE_OF_JUDGES))
     {
         judges[index] = judge;
         number_of_judges++;
@@ -214,11 +245,15 @@ void setJudgeAt(const Judge& judge , unsigned int index)
 
 void setEvalAt(const Evaluation& evaluation , unsigned int index)
 {
-    if (inRange(index,0,number_of_evaluations))
+    if (index == number_of_evaluations)
+    {
+        evaluations[number_of_evaluations++] = evaluation;
+    }
+    else if (inRange(index,0,number_of_evaluations-1))
     {
         evaluations[index] = evaluation;
     }
-    else if (inRange(index,0,Size::kMIN_SIZE_OF_EVALUATIONS))
+    else if (inRange(index,number_of_evaluations + 1,Size::kMIN_SIZE_OF_EVALUATIONS))
     {
         evaluations[index] = evaluation;
         number_of_evaluations++;
@@ -231,11 +266,14 @@ void setEvalAt(const Evaluation& evaluation , unsigned int index)
 
 void setAdminAt(const Admin& admin , unsigned int index)
 {
-    if (inRange(index,0,number_of_admins))
+    if (index == number_of_admins)    {
+        admins[number_of_admins++] = admin;
+    }
+    else if (inRange(index,0,number_of_admins-1))
     {
         admins[index] = admin;
     }
-    else if (inRange(index,0,Size::kMIN_SIZE_OF_ADMINS))
+    else if (inRange(index,number_of_admins + 1,Size::kMIN_SIZE_OF_ADMINS))
     {
         admins[index] = admin;
         number_of_admins++;

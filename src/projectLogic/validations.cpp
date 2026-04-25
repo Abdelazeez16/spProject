@@ -46,14 +46,34 @@ Response isTeamPresentById(const string& id)
     return response;
 }
 
+Response isJudgePresentById(const string& id)
+{
+    Response response = {nullptr, ProgramTypes::NONE, Status::STATUS_404_NOT_FOUND};
+    for(int i = 0; i < getNumberOfJudges();i++)
+    {
+        Judge current_judge = getJudgeAt(i);
+        if (current_judge.judge_id_ == id)
+        {
+            response.content_ptr_ = &getJudgeAt(i);
+            response.content_type_ = ProgramTypes::JUDGE;
+            response.status_ = Status::STATUS_200_OK;
+            return response;
+        }
+        
+    }
+    return response;
+}
+
 Response checkAdminByPassword(const string& user_name , const string& password)
 {
     Response response = {};
     for(int i = 0; i < getNumberOfAdmins();i++)
     {
         Admin currentAdmin = getAdminAt(i);
+        // check if the username matches
         if (currentAdmin.username_ == user_name)
         {
+            // if the username matches check if the password is correct
             if (verifyPassword(password , currentAdmin.password_))
             {
                 response.content_ptr_ = &getAdminAt(i);
@@ -61,7 +81,7 @@ Response checkAdminByPassword(const string& user_name , const string& password)
                 response.status_ = Status::STATUS_200_OK;
                 return response;
             }
-            else
+            else // if the password is incorrect return unauthorized status
             {
                 response.content_ptr_ = nullptr;
                 response.content_type_ = ProgramTypes::NONE;
@@ -69,14 +89,7 @@ Response checkAdminByPassword(const string& user_name , const string& password)
                 return response;
             }
         }
-        else
-        {
-            response.content_ptr_ = nullptr;
-            response.content_type_ = ProgramTypes::NONE;
-            response.status_ = Status::STATUS_404_NOT_FOUND;
-            return response;
-        }
     }
-    response.status_ = Status::STATUS_401_UNAUTHORIZED;
+    response.status_ = Status::STATUS_404_NOT_FOUND;
     return response;
 }

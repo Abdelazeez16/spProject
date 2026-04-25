@@ -23,7 +23,6 @@ Response loginAdmin(const string& user_name , const string& password)
         setCurrentUsr(*(Admin*)check_response.content_ptr_);
         return response;
         break;
-    case Status::STATUS_401_UNAUTHORIZED:
     case Status::STATUS_404_NOT_FOUND:
         return response;
         break;

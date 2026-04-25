@@ -29,7 +29,7 @@ string substr(const string& str, const int& start, int end = -1);
 // @param target The character to count.
 // @param str The string to search in.
 // @return The number of occurrences of the character in the string.
-int countChar(const char& target , const string& str);
+unsigned int countChar(const char& target , const string& str);
 
 // A function that removes a substring from a string given a start index
 // @param str The string to remove the substring from.
@@ -44,3 +44,9 @@ string cutSubString(const string& str , const int& start , const int& end);
 // @param end The end index of the substring.
 // @return The string with the substring removed.
 string f_cutSubString(string& str , const int& start , const int& end);
+
+// A function that splits a string into an array of strings based on a splitting character
+// @param str_to_split The string to split.
+// @param split_at_char The character to split the string at.
+// @param split_it_in The array to store the split strings in.
+void splitString(const string& str_to_split , const char& split_at_char , string* split_it_in);

@@ -8,6 +8,8 @@ using std::endl;
 
 void displayFinalReport()
 {
+    // calculate all scores for all teams
+    rankAllTeams();
     for(int i=0;i<getNumberOfTeams();i++)
     {
         cout<<"Team: "<<getTeamAt(i).team_name_<<endl;
@@ -16,6 +18,5 @@ void displayFinalReport()
         cout<<"Rank: "<<getTeamAt(i).rank_<<endl;
         cout<<"------------------"<<endl;
     }
-    sortTeams();
-    cout<<"Rank: "<<getTeamAt(0).rank_<<endl;
+    cout<<"Winner team: "<<getTeamAt(0).team_name_<<endl;
 }

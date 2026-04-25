@@ -4,12 +4,14 @@
 #include "../dataStore/dataStore.hpp"
 #include "validations.hpp"
 #include <string>
+#include <iostream>
 using std::string;
 
 void registerNewTeam(const string& team_name, const string& university_name, unsigned short int number_of_members, const string& project_title)
 {
     Team current_team = createTeam(team_name,university_name,number_of_members,project_title);
     setTeamAt(current_team , getNumberOfTeams());
+    std::cout << "Team Registered! Your Team ID is: " << getTeamAt(getNumberOfTeams()-1).team_id_ << "\n";
 }
 
 Response getTeamById(const string& id)
@@ -37,14 +39,12 @@ Response modifyTeamById(const string& id ,const string& team_name, const string&
     Response response = {nullptr,ProgramTypes::NONE,Status::STATUS_404_NOT_FOUND};
     Response check_response = isTeamPresentById(id);
 
-    Team current_team = *(Team*)check_response.content_ptr_;
-
-    Team modified_team;
-    
     switch (check_response.status_)
     {
     case Status::STATUS_200_OK :
     {
+        Team modified_team;
+        Team current_team = *(Team*)check_response.content_ptr_;
         short int team_idx = getTeamIdxById(id);
         modified_team = updateTeam(current_team,team_name,university_name,number_of_members,project_title);
         setTeamAt(modified_team,team_idx);
@@ -64,22 +64,22 @@ Response submitProjectByTeamId(const string& id , const string& project_title)
     Response response = {nullptr,ProgramTypes::NONE,Status::STATUS_404_NOT_FOUND};
     Response check_response = isTeamPresentById(id);
 
-    Team current_team = *(Team*)check_response.content_ptr_;
-
+    
     Team modified_team;
     
     switch (check_response.status_)
     {
-    case Status::STATUS_200_OK :
-    {
-        short int team_idx = getTeamIdxById(id);
-        modified_team = updateTeam(current_team,current_team.team_name_,current_team.university_name_,current_team.number_of_members_,project_title);
-        setTeamAt(modified_team,team_idx);
-        
-        response.content_ptr_ = &getTeamAt(team_idx);
-        response.content_type_ = ProgramTypes::TEAM;
-        response.status_ = Status::STATUS_200_OK;
-    }
+        case Status::STATUS_200_OK :
+        {
+            Team current_team = *(Team*)check_response.content_ptr_;
+            short int team_idx = getTeamIdxById(id);
+            modified_team = updateTeam(current_team,current_team.team_name_,current_team.university_name_,current_team.number_of_members_,project_title);
+            setTeamAt(modified_team,team_idx);
+            
+            response.content_ptr_ = &getTeamAt(team_idx);
+            response.content_type_ = ProgramTypes::TEAM;
+            response.status_ = Status::STATUS_200_OK;
+        }
         break;
     
     default:
@@ -89,10 +89,14 @@ Response submitProjectByTeamId(const string& id , const string& project_title)
 }
 Response AddEvaluation(const string& team_id, const string& judge_id, unsigned short innovation_score, unsigned short technical_score, unsigned short presentation_score)
 {
+    if (isJudgePresentById(judge_id).status_ != Status::STATUS_200_OK || isTeamPresentById(team_id).status_ != Status::STATUS_200_OK)
+    {
+        return {nullptr,ProgramTypes::NONE,Status::STATUS_404_NOT_FOUND};
+    }
+    
     Evaluation current_eval = createEvaluation(team_id,judge_id, innovation_score, technical_score, presentation_score);
     setEvalAt(current_eval,getNumberOfEvaluations());
     short eval_idx = getEvalIdxById(current_eval.evaluation_id_);
     Response response = {&getEvalAt(eval_idx),ProgramTypes::EVALUATION,Status::STATUS_201_CREATED};
     return response;
 }
-

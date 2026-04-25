@@ -8,43 +8,22 @@
 // Converts a team string into a Team struct.
 Team deserializeTeam(const string& serialized_team)
 {
-    string entity_string = serialized_team;
     Team team = {};
-    if (countChar('|' , entity_string) == 0) return team;
-    for (int i = 1; i <= 7; i++)
-    {
-        if (i == 1)
-        {
-            string team_id = substr( f_cutSubString(entity_string,0,indexOfChar('|' , entity_string)) , 0 , indexOfChar('|' , entity_string)-1 );
-            team.team_id_ = team_id;
-        }
-        else if(i == 2){
-            string team_name = substr( f_cutSubString(entity_string,0,indexOfChar('|' , entity_string)) , 0 , indexOfChar('|' , entity_string)-1 );
-            team.team_name_ = team_name;
-        }
-        else if(i == 3){
-            string university_name = substr( f_cutSubString(entity_string,0,indexOfChar('|' , entity_string)) , 0 , indexOfChar('|' , entity_string)-1 );
-            team.university_name_ = university_name;
-        }
-        else if(i == 4){
-            string number_of_members = substr( f_cutSubString(entity_string,0,indexOfChar('|' , entity_string)) , 0 , indexOfChar('|' , entity_string)-1 );
-            team.number_of_members_ = numAstr( number_of_members );
-        }
-        else if(i == 5){
-            string project_title = substr( f_cutSubString(entity_string,0,indexOfChar('|' , entity_string)) , 0 , indexOfChar('|' , entity_string)-1 );
-            team.project_title_ = project_title;
-        }
-        else if(i == 6){
-            string final_score = substr( f_cutSubString(entity_string,0,indexOfChar('|' , entity_string)) , 0 , indexOfChar('|' , entity_string)-1 );
-            team.final_score_ = floatStr( final_score );
-        }
-        else if(i == 7){
-            string rank = substr( f_cutSubString(entity_string,0,indexOfChar('|' , entity_string)) , 0 , indexOfChar('|' , entity_string)-1 );
-            team.rank_ = numAstr( rank );
-        }
-        
-    }
-    
+
+    if (countChar('|' , serialized_team) == 0) return team;
+
+    string serialized_team_members[NumOfMembers::kNUM_OF_TEAM_MEMBERS] = {};
+
+    splitString(serialized_team , '|' , serialized_team_members);
+
+    team.team_id_ = serialized_team_members[0];
+    team.team_name_ = serialized_team_members[1];
+    team.university_name_ = serialized_team_members[2];
+    team.number_of_members_ = numAstr(serialized_team_members[3]);
+    team.project_title_ = serialized_team_members[4];
+    team.final_score_ = floatStr(serialized_team_members[5]);
+    team.rank_ = numAstr(serialized_team_members[6]);
+
     return team;
 }
 
@@ -52,34 +31,19 @@ Team deserializeTeam(const string& serialized_team)
 // Converts a judge string into a Judge struct.
 Judge deserializeJudge(const string& serialized_judge)
 {
-    string entity_string = serialized_judge;
     Judge judge = {};
-    if (countChar('|' , entity_string) == 0) return judge;
-    for (int i = 1; i <= 5; i++)
-    {
-        if (i == 1)
-        {
-            string judge_id = substr( f_cutSubString(entity_string,0,indexOfChar('|' , entity_string)) , 0 , indexOfChar('|' , entity_string)-1 );
-            judge.judge_id_ = judge_id;
-        }
-        else if(i == 2){
-            string name = substr( f_cutSubString(entity_string,0,indexOfChar('|' , entity_string)) , 0 , indexOfChar('|' , entity_string)-1 );
-            judge.name_ = name;
-        }
-        else if(i == 3){
-            string speciality = substr( f_cutSubString(entity_string,0,indexOfChar('|' , entity_string)) , 0 , indexOfChar('|' , entity_string)-1 );
-            judge.specialty_ = speciality;
-        }
-        else if(i == 4){
-            string username = substr( f_cutSubString(entity_string,0,indexOfChar('|' , entity_string)) , 0 , indexOfChar('|' , entity_string)-1 );
-            judge.username_ = username;
-        }
-        else if(i == 5){
-            string password = substr( f_cutSubString(entity_string,0,indexOfChar('|' , entity_string)) , 0 , indexOfChar('|' , entity_string)-1 );
-            judge.password_ = password;
-        }
-        
-    }
+
+    if (countChar('|' , serialized_judge) == 0) return judge;
+
+    string serialized_judge_members[NumOfMembers::kNUM_OF_JUDGE_MEMBERS] = {};
+
+    splitString(serialized_judge , '|' , serialized_judge_members);
+
+    judge.judge_id_ = serialized_judge_members[0];
+    judge.name_ = serialized_judge_members[1];
+    judge.specialty_ = serialized_judge_members[2];
+    judge.username_ = serialized_judge_members[3];
+    judge.password_ = serialized_judge_members[4];
     
     return judge;
 }
@@ -88,68 +52,41 @@ Judge deserializeJudge(const string& serialized_judge)
 // Converts an evaluation string into an Evaluation struct.
 Evaluation deserializeEvaluation(const string& serialized_evaluation)
 {
-    string entity_string = serialized_evaluation;
     Evaluation evaluation = {};
-    if (countChar('|' , entity_string) == 0) return evaluation;
 
-    for (int i = 1; i <= 7; i++)
-    {
-        if (i == 1)
-        {
-            string evaluation_id = substr( f_cutSubString(entity_string,0,indexOfChar('|' , entity_string)) , 0 , indexOfChar('|' , entity_string)-1 );
-            evaluation.evaluation_id_ = evaluation_id;
-        }
-        else if(i == 2){
-            string team_id = substr( f_cutSubString(entity_string,0,indexOfChar('|' , entity_string)) , 0 , indexOfChar('|' , entity_string)-1 );
-            evaluation.team_id_ = team_id;
-        }
-        else if(i == 3){
-            string judge_id = substr( f_cutSubString(entity_string,0,indexOfChar('|' , entity_string)) , 0 , indexOfChar('|' , entity_string)-1 );
-            evaluation.judge_id_ = judge_id;
-        }
-        else if(i == 4){
-            string innovation_score = substr( f_cutSubString(entity_string,0,indexOfChar('|' , entity_string)) , 0 , indexOfChar('|' , entity_string)-1 );
-            evaluation.innovation_score_ = numAstr(innovation_score);
-        }
-        else if(i == 5){
-            string technical_score = substr( f_cutSubString(entity_string,0,indexOfChar('|' , entity_string)) , 0 , indexOfChar('|' , entity_string)-1 );
-            evaluation.technical_score_ = numAstr(technical_score);
-        }
-        else if(i == 6){
-            string presentation_score = substr( f_cutSubString(entity_string,0,indexOfChar('|' , entity_string)) , 0 , indexOfChar('|' , entity_string)-1 );
-            evaluation.presentation_score_ = numAstr(presentation_score);
-        }
-        else if(i == 7){
-            string total_score = substr( f_cutSubString(entity_string,0,indexOfChar('|' , entity_string)) , 0 , indexOfChar('|' , entity_string)-1 );
-            evaluation.total_score_ = numAstr(total_score);
-        }
-    }
-    return evaluation; 
+    if (countChar('|' , serialized_evaluation) == 0) return evaluation;
+
+    string serialized_evaluation_members[NumOfMembers::kNUM_OF_EVALUATION_MEMBERS] = {};
+
+    splitString(serialized_evaluation , '|' , serialized_evaluation_members);
+
+    evaluation.evaluation_id_ = serialized_evaluation_members[0];
+    evaluation.team_id_ = serialized_evaluation_members[1];
+    evaluation.judge_id_ = serialized_evaluation_members[2];
+    evaluation.innovation_score_ = numAstr(serialized_evaluation_members[3]);
+    evaluation.technical_score_ = numAstr(serialized_evaluation_members[4]);
+    evaluation.presentation_score_ = numAstr(serialized_evaluation_members[5]);
+    evaluation.total_score_ = numAstr(serialized_evaluation_members[6]);
+
+    return evaluation;
 }
 
 
 // Converts an admin string into an Admin struct.
 Admin deserializeAdmin(const string& admin_string)
 {
-    string entity_string = admin_string;
     Admin admin = {};
-    if (countChar('|' , entity_string) == 0) return admin;
-    for (int i = 1; i <= 3; i++)
-    {
-        if (i == 1)
-        {
-            string admin_id = substr( f_cutSubString(entity_string,0,indexOfChar('|' , entity_string)) , 0 , indexOfChar('|' , entity_string)-1 );
-            admin.admin_id_ = admin_id;
-        }
-        else if(i == 2){
-            string username = substr( f_cutSubString(entity_string,0,indexOfChar('|' , entity_string)) , 0 , indexOfChar('|' , entity_string)-1 );
-            admin.username_ = username;
-        }
-        else if(i == 3){
-            string password = substr( f_cutSubString(entity_string,0,indexOfChar('|' , entity_string)) , 0 , indexOfChar('|' , entity_string)-1 );
-            admin.password_ = password;
-        }
-    }
+
+    if (countChar('|' , admin_string) == 0) return admin;
+
+    string serialized_admin_members[NumOfMembers::kNUM_OF_ADMIN_MEMBERS] = {};
+
+    splitString(admin_string , '|' , serialized_admin_members);
+
+    admin.admin_id_ = serialized_admin_members[0];
+    admin.username_ = serialized_admin_members[1];
+    admin.password_ = serialized_admin_members[2];
+
     return admin;
 }
 /***************************************************************/

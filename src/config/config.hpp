@@ -11,6 +11,13 @@ namespace Size
     inline constexpr int kMIN_SIZE_OF_EVALUATIONS = 30;
     inline constexpr int kMIN_SIZE_OF_ADMINS = 2;
 }
+namespace NumOfMembers
+{
+    inline constexpr int kNUM_OF_TEAM_MEMBERS = 7;
+    inline constexpr int kNUM_OF_JUDGE_MEMBERS = 5;
+    inline constexpr int kNUM_OF_EVALUATION_MEMBERS = 7;
+    inline constexpr int kNUM_OF_ADMIN_MEMBERS = 3;
+}
 
 /* precision for floating-point conversions */
 namespace Precision

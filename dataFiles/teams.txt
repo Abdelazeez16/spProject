@@ -1,3 +1,4 @@
-T001|Abdo|Cairo University|5|Smart Traffic System|4.5|12|
-T002|ByteMasters|Ain Shams University|4|AI Healthcare Assistant|4.8|3|
-T003|CodeStorm|Alexandria University|6|Cloud-Based LMS|4.2|18|
+team_1|codeHorses|AInShams|7|codeHorses 2|27.0|1|
+T002|ByteMasters|Ain Shams University|4|AI Healthcare Assistant|25.0|2|
+T001|Experimental team name|cairo|5|code horses|24.0|3|
+T003|CodeStorm|Alexandria University|6|Cloud-Based LMS|24.0|4|

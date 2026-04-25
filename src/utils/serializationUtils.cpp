@@ -58,7 +58,7 @@ string serializeEntityArr(const Team* const team_struct_arr , int size)
     string serialized_str = "";
     for (int i = 0; i < size; i++)
     {
-        serialized_str += serializeEntity(team_struct_arr[i]) + ';';
+        serialized_str += serializeEntity(team_struct_arr[i]) + '\n';
     }
     return serialized_str;
 }
@@ -72,7 +72,7 @@ string serializeEntityArr(const Judge* const judge_struct_arr , int size)
     string serialized_str = "";
     for (int i = 0; i < size; i++)
     {
-        serialized_str += serializeEntity(judge_struct_arr[i]) + ';';
+        serialized_str += serializeEntity(judge_struct_arr[i]) + '\n';
     }
     return serialized_str;
 }
@@ -86,7 +86,7 @@ string serializeEntityArr(const Evaluation* const evaluation_struct_arr, int siz
     string serialized_str = "";
     for (int i = 0; i < size; i++)
     {
-        serialized_str += serializeEntity(evaluation_struct_arr[i]) + ';';
+        serialized_str += serializeEntity(evaluation_struct_arr[i]) + '\n';
     }
     return serialized_str;
 }
@@ -100,7 +100,7 @@ string serializeEntityArr(const Admin* const admin_struct_arr, int size)
     string serialized_str = "";
     for (int i = 0; i < size; i++)
     {
-        serialized_str += serializeEntity(admin_struct_arr[i]) + ';';
+        serialized_str += serializeEntity(admin_struct_arr[i]) + '\n';
     }
     return serialized_str;
 }

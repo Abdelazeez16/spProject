@@ -25,7 +25,7 @@ string getTeams()
         content += line + "\n";
     }
 
-    return content;
+    return content + '\b';
 }
 
 // A function that reads the judges file and returns its content as a string.
@@ -48,7 +48,7 @@ string getJudges()
         content += line + "\n";
     }
 
-    return content;
+    return content + '\b';
 }
 
 // A function that reads the evaluations file and returns its content as a string.
@@ -70,7 +70,7 @@ string getEvals()
         content += line + "\n";
     }
 
-    return content;
+    return content + '\b';
 }
 
 // A function that reads the admins file and returns its content as a string.
@@ -92,5 +92,5 @@ string getAdmins()
         content += line + "\n";
     }
 
-    return content;
+    return content + '\b';
 }

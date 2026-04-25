@@ -134,11 +134,14 @@ int main()
             int tech  = readInt("Technical  (0-10): ", 0, 10);
             int pres  = readInt("Presentation (0-10): ", 0, 10);
 
-            AddEvaluation(teamId, judgeId,
-                          static_cast<unsigned short>(inno),
-                          static_cast<unsigned short>(tech),
-                          static_cast<unsigned short>(pres));
-            cout << "✅ Evaluation Added!\n";
+            Response res = AddEvaluation(teamId, judgeId,
+                                          static_cast<unsigned short>(inno),
+                                          static_cast<unsigned short>(tech),
+                                          static_cast<unsigned short>(pres));
+            if (res.status_ == Status::STATUS_201_CREATED)
+                cout << "✅ Evaluation Added!\n";
+            else
+                cout << "❌ Wrong ID!\n";
             break;
         }
 

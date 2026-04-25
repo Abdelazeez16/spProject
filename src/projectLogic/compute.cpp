@@ -31,6 +31,19 @@ float calculateFinalScore(const string& team_id)
         return 0;
 }
 
+// A function that assigns final scores to all teams in the teams array based on their evaluations.
+void assignFinalScores()
+{
+    for (unsigned int i = 0; i < getNumberOfTeams(); i++)
+    {
+        Team current_team = getTeamAt(i);
+        current_team.final_score_ = calculateFinalScore(current_team.team_id_);
+        setTeamAt(current_team, i);
+    }
+    
+}
+
+
 //Function swap is used in teams sorting
 void swapTwoTeams( unsigned short idx_1 , unsigned short idx_2 )
 {
@@ -54,6 +67,7 @@ void sortTeams ()
 //Gives each team its ranking 
 void rankAllTeams () 
 {
+    assignFinalScores();
     sortTeams();
     for (int i = 0; i < getNumberOfTeams() ; ++i) 
     {
