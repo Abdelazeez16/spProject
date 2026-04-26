@@ -1,5 +1,5 @@
-J001|Ahmed Hossam|AI|ahossam|hashedpwd123|
-J002|Laila Samir|Cybersecurity|lsamir|hashedpwd456|
-J003|Mohamed Ali|Robotics|mali|hashedpwd789|
-J004|Sara Youssef|Software Engineering|syoussef|hashedpwd101|
-J005|Omar Khaled|Data Science|okhaled|hashedpwd202|
+judge_Ah3VCH|judge_Omar|Cybersecurity|sara123|$2a$12$ykW8a2Vo9YcRU0hFuONvWeK8lWx5cTG7DLNOEbzzsB2t7M8lz8Bsm|
+judge_ZamMRX|judge_Omar|Data Science|ahmed789|$2a$12$pAkCE8Qb9sMBo5.W1B8lDOJNlMc6wArfWvJ.RvqueV/3m24MMH2ry|
+judge_KrTkT0|judge_Sara|AI|sara123|$2a$12$JAi4W2c7Uls3LED1zqyPde3l5UDzQdpf.H/tiQSdVl.jyeAOH6OTW|
+judge_3nbx2t|judge_Mohamed|Cybersecurity|ahmed789|$2a$12$azMiwwx73hwbj5EUsMHu1.ojL8vHv13c6LN0pxafAkg8VJxufDktW|
+judge_5SSNA5|judge_Sara|Cloud Computing|ahmed789|$2a$12$EGEMxoRmXFTix5McTcVjmeIQehvq3S6pd55encyzxhkmClxAJXdgW|

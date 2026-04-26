@@ -23,9 +23,9 @@ float calculateFinalScore(const string& team_id)
     if (count > 0)
     {
         Team current_team = getTeamAt(getTeamIdxById(team_id));
-        current_team.final_score_ = (count > 0) ? (sum / count) : 0;
+        current_team.final_score_ = (count > 0) ? ((float)sum / count) : 0;
         setTeamAt(current_team, getTeamIdxById(team_id));
-        return sum / count;
+        return (float)sum / count;
     }
     else
         return 0;
@@ -43,7 +43,6 @@ void assignFinalScores()
     
 }
 
-
 //Function swap is used in teams sorting
 void swapTwoTeams( unsigned short idx_1 , unsigned short idx_2 )
 {
@@ -51,6 +50,7 @@ void swapTwoTeams( unsigned short idx_1 , unsigned short idx_2 )
     setTeamAt(getTeamAt(idx_2), idx_1);
     setTeamAt(temp, idx_2);
 }
+
 //Sort teams by their score in descending order
 void sortTeams ()
 {

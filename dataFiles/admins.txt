@@ -1,2 +1,2 @@
-A001|admin1|hashed_admin123|
-A002|admin2|hashed_admin456|
+admin_UWMEMi|admin1|$2a$12$PilMnas38Xc2YRAKcJzQQeFPD24YFXcUv2tuLmByBFURNc5vll21q|
+admin_iC0MMo|admin2|$2a$12$sejrdJl8JOfewP.A7BrcQe/CO5HbuGHz.FeJZK6NjBKlZ61xo76yK|

@@ -2,13 +2,14 @@
 #include "../dataStore/dataStore.hpp"
 #include "../config/config.hpp"
 #include "../utils/otherUtils.hpp"
+#include <bcrypt.h>
 #include <string>
 using std::string;
 
 
 bool verifyPassword(const string& entered_password , const string& real_password)
 {
-    return hashPassword(entered_password) == real_password;
+    return bcrypt_checkpw(entered_password.c_str(), real_password.c_str()) == 0;
 }
 
 Response isAdminPresentById(const string& id)

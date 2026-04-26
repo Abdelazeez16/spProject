@@ -1,4 +1,5 @@
-team_1|codeHorses|AInShams|7|codeHorses 2|27.0|1|
-T002|ByteMasters|Ain Shams University|4|AI Healthcare Assistant|25.0|2|
-T001|Experimental team name|cairo|5|code horses|24.0|3|
-T003|CodeStorm|Alexandria University|6|Cloud-Based LMS|24.0|4|
+team_BcXOPE|Vcoders|AinShams University|7|CodeHorses|30.0|1|
+team_UZpmVi|team 4|university no. 4|7|Project 4|29.0|2|
+team_PEPPE8|team 2|university no. 2|5|Project 2|29.0|3|
+team_CpPfZ3|team 1|university no. 1|4|Project 1|27.0|4|
+team_WWDZWm|team 3|university no. 3|6|Project 3|18.0|5|

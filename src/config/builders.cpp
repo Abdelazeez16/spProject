@@ -5,20 +5,19 @@
 using std::string;
 
 string generateTeamId(){
-    static int team_id_counter = 1;
-    return "team_" + std::to_string(team_id_counter++);
+    return "team_" + generateID();
 }
 string generateJudgeId(){
     static int judge_id_counter = 1;
-    return "judge_" + std::to_string(judge_id_counter++);
+    return "judge_" + generateID();
 }
 string generateEvalId(){
     static int eval_id_counter = 1;
-    return "eval_" + std::to_string(eval_id_counter++);
+    return "eval_" + generateID();
 }
 string generateAdminId(){
     static int admin_id_counter = 1;
-    return "admin_" + std::to_string(admin_id_counter++);
+    return "admin_" + generateID();
 }
 Team createTeam(const string& team_name, const string& university_name, unsigned short number_of_members, const string& project_title)
 {

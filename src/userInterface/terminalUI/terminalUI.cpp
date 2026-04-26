@@ -10,21 +10,27 @@
 using namespace std;
 
 // --- Session state ---
-bool isLoggedIn = false;
+CurrentUser current_user = {};
+
+bool isLoggedIn()
+{
+    return !(current_user.user_ptr_ == nullptr || current_user.user_type_ == RoleType::ANONYMOUS);
+}
+
 
 void showMenu()
 {
     cout << "\n==============================\n";
-    cout << "  🎯 Virtual Hackathon System\n";
+    cout << "---Virtual Hackathon System---\n";
     cout << "==============================\n";
-    if (isLoggedIn)
+    if (isLoggedIn())
         cout << "  [Logged in as Admin]\n";
     cout << "==============================\n";
     cout << "1. Login Admin\n";
-    cout << "2. Register Team\n";
+    cout << "2. Register Team         [Admin only]\n";
     cout << "3. Add Evaluation        [Admin only]\n";
     cout << "4. Modify Team           [Admin only]\n";
-    cout << "5. Submit Project\n";
+    cout << "5. Submit Project        [Admin only]\n";
     cout << "6. Show Final Report\n";
     cout << "7. Calculate Scores\n";
     cout << "0. Exit\n";
@@ -55,7 +61,7 @@ int readInt(const string& prompt, int minVal, int maxVal)
         }
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << "⚠️  Please enter a number between " << minVal << " and " << maxVal << ".\n";
+        cout << "(!) Please enter a number between " << minVal << " and " << maxVal << ".\n";
     }
 }
 
@@ -75,13 +81,13 @@ void loginFlow()
 
     if (res.status_ == Status::STATUS_200_OK)
     {
-        isLoggedIn = true;
-        cout << "✅ Login Successful!\n";
+        current_user = {res.content_ptr_, RoleType::ADMIN};
+        cout << "(success) Login Successful!\n";
     }
     else if (res.status_ == Status::STATUS_401_UNAUTHORIZED)
-        cout << "❌ Wrong password!\n";
+        cout << "(x) Wrong password!\n";
     else
-        cout << "else Admin not found!\n";
+        cout << "(x) Admin not found!\n";
 }
 
 int main()
@@ -97,7 +103,7 @@ int main()
         {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "⚠️  Please enter a number!\n";
+            cout << "(!)  Please enter a number!\n";
             continue;
         }
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -110,21 +116,27 @@ int main()
 
         case 2:
         {
+            if (!isLoggedIn())
+            {
+                cout << "(Not Authorized!) Admin login required!\n";
+                break;
+            }
+
             string name    = readLine("Team Name: ");
             string uni     = readLine("University: ");
             int members    = readInt("Members: ", 1, 100);
             string project = readLine("Project Title: ");
 
             registerNewTeam(name, uni, static_cast<unsigned short>(members), project);
-            cout << "✅ Team Registered!\n";
+            cout << "(success) Team Registered!\n";
             break;
         }
 
         case 3:
         {
-            if (!isLoggedIn)
+            if (!isLoggedIn())
             {
-                cout << "🔒 Admin login required!\n";
+                cout << "(Not Authorized!) Admin login required!\n";
                 break;
             }
 
@@ -139,17 +151,17 @@ int main()
                                           static_cast<unsigned short>(tech),
                                           static_cast<unsigned short>(pres));
             if (res.status_ == Status::STATUS_201_CREATED)
-                cout << "✅ Evaluation Added!\n";
+                cout << "(success) Evaluation Added!\n";
             else
-                cout << "❌ Wrong ID!\n";
+                cout << "(x) Wrong ID!\n";
             break;
         }
 
         case 4:
         {
-            if (!isLoggedIn)
+            if (!isLoggedIn())
             {
-                cout << "🔒 Admin login required!\n";
+                cout << "(Not Authorized!) Admin login required!\n";
                 break;
             }
 
@@ -162,22 +174,28 @@ int main()
             Response res = modifyTeamById(id, name, uni,
                                           static_cast<unsigned short>(members), project);
             if (res.status_ == Status::STATUS_200_OK)
-                cout << "✅ Team Updated!\n";
+                cout << "(success) Team Updated!\n";
             else
-                cout << "❌ Team not found!\n";
+                cout << "(x) Team not found!\n";
             break;
         }
 
         case 5:
         {
+            if (!isLoggedIn())
+            {
+                cout << "(Not Authorized!) Admin login required!\n";
+                break;
+            }
+
             string id      = readLine("Team ID: ");
             string project = readLine("New Project Title: ");
 
             Response res = submitProjectByTeamId(id, project);
             if (res.status_ == Status::STATUS_200_OK)
-                cout << "🚀 Project Submitted!\n";
+                cout << "(success) Project Submitted!\n";
             else
-                cout << "❌ Team not found!\n";
+                cout << "(x) Team not found!\n";
             break;
         }
 
@@ -191,21 +209,21 @@ int main()
 
             float score = calculateFinalScore(teamId);
             if (score < 0.0f)
-                cout << "❌ Team not found!\n";
+                cout << "(x) Team not found!\n";
             else if (score == 0.0f)
-                cout << "⚠️  No evaluations found for this team!\n";
+                cout << "(!) No evaluations found for this team!\n";
             else
-                cout << "⭐ Final Score = " << score << "\n";
+                cout << "Final Score = " << score << "\n";
             break;
         }
 
         case 0:
             saveData();
-            cout << "💾 Data Saved. Goodbye!\n";
+            cout << "Data Saved. Goodbye!\n";
             break;
 
         default:
-            cout << "⚠️  Invalid choice, please choose between 0 and 7!\n";
+            cout << "(!) Invalid choice, please choose between 0 and 7!\n";
         }
 
     } while (choice != 0);

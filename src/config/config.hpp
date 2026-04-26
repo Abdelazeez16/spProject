@@ -23,7 +23,8 @@ namespace NumOfMembers
 namespace Precision
 {
     inline constexpr int kFLOAT_PRECISION = 5;
-    inline constexpr int kDOUBLE_PRECISION = 5;  
+    inline constexpr int kDOUBLE_PRECISION = 5;
+    inline constexpr unsigned short kID_DEFAULT_LENGTH = 6;
 } 
 
 /*absolute paths for codebase resources*/
@@ -133,7 +134,7 @@ struct Admin
 // struct of current logged in user ( can be either a judge or an admin )
 struct CurrentUser
 {
-    void *user_ptr_;
+    const void *user_ptr_;
     RoleType::RoleType user_type_;
 };
 
