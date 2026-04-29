@@ -4,21 +4,23 @@
 #include <string>
 using std::string;
 
-string generateTeamId(){
+string generateTeamId()
+{
     return "team_" + generateID();
 }
-string generateJudgeId(){
-    static int judge_id_counter = 1;
+string generateJudgeId()
+{
     return "judge_" + generateID();
 }
-string generateEvalId(){
-    static int eval_id_counter = 1;
+string generateEvalId()
+{
     return "eval_" + generateID();
 }
-string generateAdminId(){
-    static int admin_id_counter = 1;
+string generateAdminId()
+{
     return "admin_" + generateID();
 }
+
 Team createTeam(const string& team_name, const string& university_name, unsigned short number_of_members, const string& project_title)
 {
     Team team;

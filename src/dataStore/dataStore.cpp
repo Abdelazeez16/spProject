@@ -54,12 +54,12 @@ void saveData()
     SaveShard(EntityType::ADMIN, admin_arr_str);
 }
 /***************************************************************************/
-void setCurrentUsr(Team& team)
+void setCurrentUsr(Team& team) // عشان لو عايز اعمل تييم ادمن قدام
 {
     current_user.user_ptr_ = &team;
     current_user.user_type_ = RoleType::TEAM;
 }
-void setCurrentUsr(Judge& judge)
+void setCurrentUsr(Judge& judge) // عشان لو عايز اخلى الجادج يعرف يعمل login
 {
     current_user.user_ptr_ = &judge;
     current_user.user_type_ = RoleType::JUDGE;

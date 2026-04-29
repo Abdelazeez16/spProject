@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LoginDialog</class>
+ <widget class="QDialog" name="LoginDialog">
+  <property name="geometry">
+   <rect><x>0</x><y>0</y><width>380</width><height>420</height></rect>
+  </property>
+  <property name="windowTitle">
+   <string>تسجيل دخول الأدمن</string>
+  </property>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
